@@ -26,7 +26,7 @@ public class AuthInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         response.setHeader("Content-type", "application/json;charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
-        // 无token参数拒绝，放通的登录接口除外
+        // 无token参数拒绝，放通的接口除外
         if (request.getHeader(TOKEN_HEADER) == null || request.getHeader(TOKEN_HEADER).isEmpty()) {
             response.getWriter().write(JSON.toJSONString(JsonResponse.tokenError("缺少token参数")));
             return false;

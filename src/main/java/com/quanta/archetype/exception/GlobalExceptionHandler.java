@@ -31,7 +31,7 @@ import java.util.Map;
  */
 @Slf4j
 @Order(0)
-@ControllerAdvice(basePackages = "com.quanta.lh.controller")
+@ControllerAdvice(basePackages = "com.quanta.archetype.controller")
 public class GlobalExceptionHandler {
 
     private static final String ERROR_MESSAGE_TEMPLATE = "%s\n[Msg]%s\n[File]%s\n[LogId]%s\n[Url]%s\n[Ip]%s\n[Args]%s\n[Token]%s";

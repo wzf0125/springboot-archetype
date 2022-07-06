@@ -16,8 +16,8 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * @description 腾讯云工具类
  * @author Leslie Leung
+ * @description 腾讯云工具类
  * @date 2021/11/2
  */
 @Slf4j
@@ -28,9 +28,7 @@ public class COSUtils {
 
     private final QcloudProperties qcloudProperties;
 
-    public static final String LABOR_PHOTO_PREFIX = "labor/";
-    public static final String QRCODE_PREFIX = "qrcode/";
-    public static final String LABOR_REPORT_PREFIX = "labor_report/";
+    public static final String PHOTO_PREFIX = "img/";
 
     public COSUtils(QcloudProperties qcloudProperties) {
         this.qcloudProperties = qcloudProperties;
@@ -38,6 +36,7 @@ public class COSUtils {
 
     /**
      * 上传图片
+     *
      * @param file 要上传的图片
      * @return 图片url
      */
@@ -59,10 +58,10 @@ public class COSUtils {
             if (localFile.length() > 10485760) {
                 throw new ApiException("上传的图片大于10MB，请减小大小后重试");
             }
-            fileName = LABOR_PHOTO_PREFIX + DigestUtils.md5DigestAsHex(String.valueOf(System.currentTimeMillis()).getBytes()) + substring;
+            fileName = PHOTO_PREFIX + DigestUtils.md5DigestAsHex(String.valueOf(System.currentTimeMillis()).getBytes()) + substring;
             PutObjectRequest putObjectRequest = new PutObjectRequest(qcloudProperties.getBucketName(), fileName, localFile);
             cosClient.putObject(putObjectRequest);
-        } catch (IOException e){
+        } catch (IOException e) {
             log.error(e.getMessage());
             throw new ApiException("文件存储出错，请重试");
         } catch (CosClientException e) {
