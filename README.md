@@ -19,6 +19,7 @@
 - 根据需要可删除的部分
   - WxMaConfig & WxMaProperties 提供微信小程序的功能 无需对接小程序可删除
   - QcloudConfig & QcloudProperties 无需使用腾讯云储存桶功能时可删除
+  - OSSConfig & OSSProperties & OSSUtils 无需使用阿里云对象存储功能时可删除
 - 代码生成器部分
   - CodeGenerator 根据注释填入对应信息后直接运行即可一键生成controller service mapper entity
   - 生成的entity需要手动调整一些属性的类型 
