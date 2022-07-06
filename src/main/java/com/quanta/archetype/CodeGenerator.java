@@ -11,37 +11,41 @@ import java.util.List;
 
 public class CodeGenerator {
     public static void main(String[] args) {
-        String url = "";
-        String username = "";
-        String password = "";
+        /* ************ 配置部分 ************ */
+        String url = ""; // 数据库url
+        String username = ""; // 数据库用户名
+        String password = ""; // 数据库密码
         List<String> tables = new ArrayList<>();
         // 添加要生成的表名
-        tables.add("");
+        tables.add("user");
+
+
+        String parent = "com.quanta"; // 项目包名 com.quanta
+        String mode = "archetype"; // 模块名 archetype
+        String author = "quanta";
+        /* ************ 配置部分 ************ */
 
         String projectPath = System.getProperty("user.dir");
         String outPutDir = projectPath + "/src/main/java";
-
-
         FastAutoGenerator.create(url, username, password)
                 .globalConfig(builder -> {
-                    builder.author("quanta") // 设置作者
+                    builder.author(author) // 设置作者
 //                            .fileOverride() // 覆盖已生成文件
                             .outputDir(outPutDir); // 指定输出目录
                 })
                 .packageConfig(builder -> {
-                    builder.parent("com.quanta")
-                            .moduleName("lh")
+                    builder.parent(parent)
+                            .moduleName(mode)
                             .entity("entity")
                             .service("service")
                             .serviceImpl("service.serviceImpl")
-//                            .controller("controller")
+                            .controller("controller")
                             .mapper("mapper")
                             .xml("mapper")
                             .pathInfo(Collections.singletonMap(OutputFile.mapperXml, System.getProperty("user.dir") + "\\src\\main\\resources\\mapper"));
                 })
                 .strategyConfig(builder -> {
                     builder.addInclude(tables)
-                            .addTablePrefix("p_")
                             .serviceBuilder()
                             .formatServiceFileName("%sService")
                             .formatServiceImplFileName("%sServiceImpl")
@@ -49,9 +53,9 @@ public class CodeGenerator {
                             .enableLombok()
                             .logicDeleteColumnName("deleted")
                             .enableTableFieldAnnotation()
-//                            .controllerBuilder()
-//                            .formatFileName("%sController")
-//                            .enableRestStyle()
+                            .controllerBuilder()
+                            .formatFileName("%sController")
+                            .enableRestStyle()
                             .mapperBuilder()
                             .enableBaseResultMap()  //生成通用的resultMap
                             .formatMapperFileName("%sMapper")

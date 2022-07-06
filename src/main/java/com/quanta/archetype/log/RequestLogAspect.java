@@ -25,7 +25,7 @@ public class RequestLogAspect {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    public static final String LOG_TEMPLATE = "LogId: {} | Request URL: {} | Http Method: {} | IP: {} | Class Method: {} | Args: {} | Token: {} | Msg: {}";
+    public static final String LOG_TEMPLATE = "LogId: {} | Request URL: {} | Http Method: {} | URL: {} | IP: {} | Class Method: {} | Args: {} | Token: {} | Msg: {}";
 
     @Pointcut("execution(public * com.quanta.archetype.controller..*.*(..))")
     public void requestLog() {
@@ -44,6 +44,7 @@ public class RequestLogAspect {
             logger.info(LOG_TEMPLATE,
                     logId,
                     request.getRequestURL().toString(),
+                    request.getHeader("X-Real-IP"),
                     request.getMethod(),
                     request.getRemoteAddr(),
                     joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName(),

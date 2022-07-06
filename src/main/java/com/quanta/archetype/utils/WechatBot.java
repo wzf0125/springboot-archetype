@@ -18,7 +18,7 @@ public class WechatBot {
         throw new IllegalStateException("Utility class");
     }
 
-    public static final String WEBHOOK_URL = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e9b2fba3-07bb-4b2e-8030-1af223c7f98f";
+    public static final String WEBHOOK_URL = "";
 
     public static void send(String msg) throws IOException {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {

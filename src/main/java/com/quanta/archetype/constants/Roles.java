@@ -13,5 +13,5 @@ public class Roles {
     public static final int ROLE_SUPER_ADMIN = 1;
     public static final int ROLE_SECOND_ADMIN = 2;
     public static final int ROLE_THIRD_ADMIN = 3;
-    public static final int ROLE_STUDENT = 4;
+    public static final int ROLE_USER = 4;
 }

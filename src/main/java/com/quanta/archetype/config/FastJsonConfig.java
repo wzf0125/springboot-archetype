@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * @description FastJson配置
- * @author gdufs
+ * @author quantacenter
  * @date 2021/11/25
  * */
 

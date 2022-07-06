@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @description MybatisPlus配置
- * @author gdufs
+ * @author quantacenter
  * @date 2021/11/25
  * */
 @MapperScan("com.baomidou.cloud.service.*.mapper*")

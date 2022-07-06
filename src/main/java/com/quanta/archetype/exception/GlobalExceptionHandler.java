@@ -34,7 +34,7 @@ import java.util.Map;
 @ControllerAdvice(basePackages = "com.quanta.lh.controller")
 public class GlobalExceptionHandler {
 
-    private static final String ERROR_MESSAGE_TEMPLATE = "%s\n[Msg]%s\n[File]%s\n[LogId]%s\n[Url]%s\n[Args]%s\n[Token]%s";
+    private static final String ERROR_MESSAGE_TEMPLATE = "%s\n[Msg]%s\n[File]%s\n[LogId]%s\n[Url]%s\n[Ip]%s\n[Args]%s\n[Token]%s";
 
     @Value("${project.isDebug}")
     private boolean isDebug;
@@ -92,6 +92,7 @@ public class GlobalExceptionHandler {
                 e.getStackTrace()[0].getFileName() + "." + e.getStackTrace()[0].getMethodName() + " (line: " + e.getStackTrace()[0].getLineNumber() + ")",
                 logId,
                 request.getRequestURL().toString(),
+                request.getHeader("X-Real-IP"),
                 request.getAttribute("args"),
                 request.getHeader("Token"));
         Map<String, Object> req = new HashMap<>();

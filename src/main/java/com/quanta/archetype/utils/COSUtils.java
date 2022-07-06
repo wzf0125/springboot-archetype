@@ -71,38 +71,4 @@ public class COSUtils {
         }
         return fileName;
     }
-
-    /**
-     * 上传二维码
-     * @param file 二维码
-     * @return 图片url
-     */
-    public String uploadQrCode(File file) {
-        String fileName;
-        try {
-            fileName = QRCODE_PREFIX + DigestUtils.md5DigestAsHex(String.valueOf(System.currentTimeMillis()).getBytes()) + ".jpg";
-            PutObjectRequest putObjectRequest = new PutObjectRequest(qcloudProperties.getBucketName(), fileName, file);
-            cosClient.putObject(putObjectRequest);
-        } catch (CosClientException e) {
-            log.error("文件上传到COS失败[ErrMsg:{}]", e.getMessage());
-            throw new ApiException("COS上传错误，请重试");
-        }
-        return fileName;
-    }
-
-    /**
-     * 上传实践报告
-     */
-    public String uploadLaborReport(File file) {
-        String fileName;
-        try {
-            fileName = LABOR_REPORT_PREFIX + DigestUtils.md5DigestAsHex(String.valueOf(System.currentTimeMillis()).getBytes()) + ".jpg";
-            PutObjectRequest putObjectRequest = new PutObjectRequest(qcloudProperties.getBucketName(), fileName, file);
-            cosClient.putObject(putObjectRequest);
-        } catch (CosClientException e) {
-            log.error("文件上传到COS失败[ErrMsg:{}]", e.getMessage());
-            throw new ApiException("COS上传错误，请重试");
-        }
-        return fileName;
-    }
 }

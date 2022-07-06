@@ -8,7 +8,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 
 /**
  * @description Redis配置类
- * @author gdufs
+ * @author quantacenter
  * @date 2021/11/25
  */
 @Configuration

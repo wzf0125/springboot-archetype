@@ -108,7 +108,6 @@ public class RedisUtils {
         return redisTemplate.opsForValue().get(key) == null ? 0 : (int) redisTemplate.opsForValue().get(key);
     }
 
-
     public long incr(String key, long delta) {
         if (delta < 0) {
             throw new RuntimeException("Incr factor must greater than zero.");

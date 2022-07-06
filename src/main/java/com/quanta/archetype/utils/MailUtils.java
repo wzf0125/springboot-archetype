@@ -29,25 +29,8 @@ public class MailUtils {
     @Value("${spring.mail.username}")
     private String mailFrom;
 
-    // TODO 改成配置
-    private final String[] adminEmails = {
-            "974500760@qq.com",
-            "1260052701@qq.com"
-    };
-
     public MailUtils(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
-    }
-
-    // 创建random对象部分来自猫兄
-    private static final Random random;
-
-    static {
-        try {
-            random = SecureRandom.getInstanceStrong();
-        } catch (NoSuchAlgorithmException e) {
-            throw new ApiException(e.getMessage());
-        }
     }
 
     /**
@@ -69,38 +52,6 @@ public class MailUtils {
         } catch (MessagingException | UnsupportedEncodingException e) {
             throw new ApiException("邮件发送出错！");
         }
-    }
-
-
-    /**
-     * 发送邮箱验证码
-     * @param recipient 收件人邮箱
-     * @param verificationCode 验证码
-     * @param type 验证码类型 0代表绑定邮箱，1代表忘记密码
-     */
-    public void sendVerificationMail(String recipient, String verificationCode, int type) {
-        String template;
-        String title;
-        if (type == 0) {
-            template = "你正在绑定【广外劳动学时】邮箱，你的验证码为 %s ，5分钟内有效。";
-            title = "【广外劳动学时】邮箱绑定验证码";
-        } else {
-            template = "你正在修改【广外劳动学时】登录密码，你的验证码为 %s ，5分钟内有效。";
-            title = "【广外劳动学时】修改密码验证码";
-        }
-        String mailBody = String.format(template, verificationCode);
-        sendMail(new String[]{recipient}, title, mailBody, false);
-    }
-
-    /**
-     * 管理员向学生发送邮件方法
-     * @param recipients 学生邮箱信息数组
-     * @param title 标题
-     * @param content 内容
-     * @param isHtml 是否以html格式发送
-     */
-    public void sendMessage(String[] recipients, String title, String content, boolean isHtml) {
-        sendMail(recipients, title, content, isHtml);
     }
 
 
