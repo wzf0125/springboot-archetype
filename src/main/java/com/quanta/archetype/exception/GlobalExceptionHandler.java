@@ -2,6 +2,7 @@ package com.quanta.archetype.exception;
 
 import com.alibaba.fastjson.JSON;
 import com.quanta.archetype.bean.JsonResponse;
+import com.quanta.archetype.constants.ResultCode;
 import com.quanta.archetype.utils.WechatBot;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,12 +44,14 @@ public class GlobalExceptionHandler {
     public @ResponseBody
     JsonResponse<Object> errorResult(Exception e) throws IOException {
         log.error(e.getMessage());
-        if(isDebug){ // 本地调试只输出错误信息
+        if (isDebug) { // 本地调试只输出错误信息
             e.printStackTrace();
-        }else{
-            WechatBot.send(createErrorMessage(e));
+            // 本地调试返回错误内容
+            return JsonResponse.error(e.getMessage());
         }
-        return JsonResponse.error(String.format("操作失败，请重试[%s]", e.getMessage()));
+        WechatBot.send(createErrorMessage(e));
+        // 线上环境仅返回服务器错误
+        return JsonResponse.error(ResultCode.SERVER_ERROR.getMsg());
     }
 
     // 数据校验异常
@@ -75,7 +78,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ApiException.class)
     public @ResponseBody
     JsonResponse<Object> apiErrorResult(ApiException e) {
-        return JsonResponse.error(e.getMessage());
+        return JsonResponse.fail(e.getMessage());
     }
 
     private String createErrorMessage(Exception e) {

@@ -49,12 +49,20 @@ public class JsonResponse<T> {
         return new JsonResponse<>(ResultCode.SUCCESS.getCode(), msg, data);
     }
 
-    public static JsonResponse<Object> error() {
+    public static JsonResponse<Object> fail() {
         return new JsonResponse<>(ResultCode.FAILED.getCode(), ResultCode.FAILED.getMsg());
     }
 
-    public static JsonResponse<Object> error(String msg) {
+    public static JsonResponse<Object> fail(String msg) {
         return new JsonResponse<>(ResultCode.FAILED.getCode(), msg);
+    }
+
+    public static JsonResponse<Object> error() {
+        return new JsonResponse<>(ResultCode.SERVER_ERROR.getCode(), ResultCode.SERVER_ERROR.getMsg());
+    }
+
+    public static JsonResponse<Object> error(String msg) {
+        return new JsonResponse<>(ResultCode.SERVER_ERROR.getCode(), msg);
     }
 
     // token异常
